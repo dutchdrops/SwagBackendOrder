@@ -5,6 +5,8 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <defaults public="true"/>
+
         <!-- Subscriber -->
         <service id="swag_backend_order.subscriber.backend_controller" class="SwagBackendOrder\Subscriber\BackendController">
             <argument type="service" id="service_container"/>
@@ -117,11 +119,11 @@
         </service>
 
         <service id="swag_backend_order.payment_translator" class="SwagBackendOrder\Components\Translation\PaymentTranslator">
-            <factory class="SwagBackendOrder\Components\Translation\PaymentTranslator" method="create"/>
+            <argument type="service" id="translation" />
         </service>
 
         <service id="swag_backend_order.shipping_translator" class="SwagBackendOrder\Components\Translation\ShippingTranslator">
-            <factory class="SwagBackendOrder\Components\Translation\ShippingTranslator" method="create"/>
+            <argument type="service" id="translation" />
         </service>
 
         <service id="swag_backend_order.product_search" class="SwagBackendOrder\Components\ProductSearch\ProductSearch">

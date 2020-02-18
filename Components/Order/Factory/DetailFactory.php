@@ -26,10 +26,6 @@ class DetailFactory
     /** @var \sArticles $articleModule */
     private $articleModule;
 
-    /**
-     * @param ModelManager $modelManager
-     * @param Modules      $modules
-     */
     public function __construct(ModelManager $modelManager, Modules $modules)
     {
         $this->modelManager = $modelManager;
@@ -37,8 +33,7 @@ class DetailFactory
     }
 
     /**
-     * @param PositionStruct $positionStruct
-     * @param bool           $isTaxFree
+     * @param bool $isTaxFree
      *
      * @throws InvalidOrderException
      *
@@ -66,6 +61,7 @@ class DetailFactory
         if (!$isTaxFree) {
             $detail->setTax($tax);
         }
+
         $detail->setTaxRate($tax->getTax());
 
         $detail->setEsdArticle(0);
@@ -85,14 +81,13 @@ class DetailFactory
         $detail->setUnit($articleDetail->getUnit() ? $articleDetail->getUnit()->getName() : 0);
         $detail->setPackUnit($articleDetail->getPackUnit());
         $detail->setAttribute($this->createDetailAttribute());
-        $detail->setEan($articleDetail->getEan());
+        $detail->setEan($positionStruct->getEan());
 
         return $detail;
     }
 
     /**
-     * @param PositionStruct $positionStruct
-     * @param bool           $isTaxFree
+     * @param bool $isTaxFree
      *
      * @return Detail
      */
